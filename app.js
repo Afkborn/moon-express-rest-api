@@ -10,11 +10,14 @@ app.use(bodyParser.json());
 // Import Routes
 const categoriesRoutes = require("./routes/categories");
 const productsRoutes = require("./routes/products");
+const usersRoutes = require("./routes/users");
 
 
 app.use("/categories", categoriesRoutes);
 
 app.use("/products", productsRoutes);
+
+app.use("/users", usersRoutes);
 
 
 mongoose.connect(process.env.DB_CONNECTION,() => {
