@@ -1,9 +1,8 @@
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
+
 const bodyParser = require("body-parser");
-// Import DB_CONNECTION from .env
-require("dotenv/config");
+const dbConnect = require("./db/dbConnect");
 
 app.use(bodyParser.json());
 
@@ -11,7 +10,7 @@ app.use(bodyParser.json());
 const categoriesRoutes = require("./routes/categories");
 const productsRoutes = require("./routes/products");
 const usersRoutes = require("./routes/users");
-
+const testRoutes = require("./routes/test");
 
 app.use("/categories", categoriesRoutes);
 
@@ -19,10 +18,23 @@ app.use("/products", productsRoutes);
 
 app.use("/users", usersRoutes);
 
+app.use("/test", testRoutes);
 
-mongoose.connect(process.env.DB_CONNECTION,() => {
-    console.log("Connected to MongoDB successfully");
-})
+dbConnect();
+
+// Curb Cores Error by adding a header here
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+  );
+  next();
+});
 
 const port = process.env.PORT || 3000;
 

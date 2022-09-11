@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Category = require("../modules/Category");
-
+const auth = require("../auth");
 // Get all categories
 router.get("/", async (req, res) => {
   console.log("GET /categories");
@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 //Post a category
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   console.log("POST /categories");
   const category = new Category({
     name: req.body.name,

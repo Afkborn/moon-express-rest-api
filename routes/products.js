@@ -1,19 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../modules/Product");
-
-//get all products
-// router.get("/", async (req, res) => {
-//   console.log("GET /products");
-//   let categoryId = req.query.categoryId;
-
-//   try {
-//     const products = await Product.find();
-//     res.json(products);
-//   } catch (err) {
-//     res.json({ message: err });
-//   }
-// });
+const auth = require("../auth");
 
 router.get("/", async (req, res) => {
   console.log("GET /products");
@@ -36,7 +24,7 @@ router.get("/", async (req, res) => {
 });
 
 //post a product
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   console.log("POST /products");
   const product = new Product({
     categoryId: req.body.categoryId,
