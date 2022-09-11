@@ -30,6 +30,26 @@ router.post("/", auth, async (req, res) => {
   }
 });
 
+//Update a category
+router.put("/:categoryID", auth, async (req, res) => {
+  console.log("PUT /categories/" + req.params.categoryID);
+  try {
+    const updatedCategory = await Category.updateOne(
+      { _id: req.params.categoryID },
+      {
+        $set: {
+          name: req.body.name,
+          seoUrl: req.body.seoUrl,
+          img: req.body.img,
+        },
+      }
+    );
+    res.json(updatedCategory);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 //get a specific category
 router.get("/:categoryID", async (req, res) => {
   console.log("GET /categories/" + req.params.categoryID);
