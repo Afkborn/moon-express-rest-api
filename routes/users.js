@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../modules/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const auth = require("../auth");
 
 router.post("/login", (request, response) => {
   User.findOne({ email: request.body.email })
