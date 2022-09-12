@@ -61,4 +61,17 @@ router.get("/:categoryID", async (req, res) => {
   }
 });
 
+//delete a category
+router.delete("/:categoryID", auth, async (req, res) => {
+  console.log("DELETE /categories/" + req.params.categoryID);
+  try {
+    const removedCategory = await Category.remove({
+      _id: req.params.categoryID,
+    });
+    res.json(removedCategory);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 module.exports = router;

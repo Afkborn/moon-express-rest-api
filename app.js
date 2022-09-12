@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 const categoriesRoutes = require("./routes/categories");
 const productsRoutes = require("./routes/products");
 const usersRoutes = require("./routes/users");
-const testRoutes = require("./routes/test");
+
 
 app.use("/categories", categoriesRoutes);
 
@@ -32,7 +32,7 @@ app.use("/products", productsRoutes);
 
 app.use("/users", usersRoutes);
 
-app.use("/test", testRoutes);
+
 
 dbConnect();
 

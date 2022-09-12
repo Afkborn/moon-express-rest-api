@@ -4,8 +4,6 @@ const User = require("../modules/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-
-
 router.post("/login", (request, response) => {
   User.findOne({ email: request.body.email })
     .then((user) => {
@@ -28,7 +26,9 @@ router.post("/login", (request, response) => {
           );
           response.status(200).send({
             message: "Login Successful",
+            _id: user._id,
             email: user.email,
+            isAdmin: user.isAdmin,
             token,
           });
         })
@@ -79,6 +79,37 @@ router.post("/register", (request, response) => {
         e,
       });
     });
+});
+
+//update a user with id
+router.put("/:userID", auth, async (req, res) => {
+  console.log("PUT /users/" + req.params.userID);
+  try {
+    const updatedUser = await User.updateOne(
+      { _id: req.params.userID },
+      {
+        $set: {
+          email: req.body.email,
+          password: req.body.password,
+          username: req.body.username,
+        },
+      }
+    );
+    res.json(updatedUser);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+//delete a user with id
+router.delete("/:userID", auth, async (req, res) => {
+  console.log("DELETE /users/" + req.params.userID);
+  try {
+    const removedUser = await User.remove({ _id: req.params.userID });
+    res.json(removedUser);
+  } catch (err) {
+    res.json({ message: err });
+  }
 });
 
 module.exports = router;
