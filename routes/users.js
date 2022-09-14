@@ -56,7 +56,8 @@ router.post("/register", (request, response) => {
       const user = new User({
         email: request.body.email,
         password: hashedPassword,
-        username: request.body.username,
+        name: request.body.name,
+        surname: request.body.surname,
       });
 
       user
@@ -68,6 +69,7 @@ router.post("/register", (request, response) => {
           });
         })
         .catch((error) => {
+          console.log(`POST USER Error: ${error}`);
           response.status(500).send({
             message: "Error creating user",
             error,
@@ -92,7 +94,9 @@ router.put("/:userID", auth, async (req, res) => {
         $set: {
           email: req.body.email,
           password: req.body.password,
-          username: req.body.username,
+          name: req.body.name,
+          surname: req.body.surname,
+
         },
       }
     );
