@@ -16,10 +16,6 @@ const UserSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  isAdmin: {
-    type: Boolean,
-    default: false,
-  },
   name : {
     type: String,
     required: [true, "Please provide a name!"],

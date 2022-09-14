@@ -29,7 +29,6 @@ router.post("/login", (request, response) => {
             message: "Login Successful",
             _id: user._id,
             email: user.email,
-            isAdmin: user.isAdmin,
             token,
           });
         })
@@ -47,6 +46,21 @@ router.post("/login", (request, response) => {
       });
     });
 });
+
+router.get("/me", auth, (request, response) => {
+  // _id is the id of the user from auth.js
+  User.findOne({ _id: request.user.userId })
+    .then((user) => {
+      response.status(200).send(user);
+    })
+    .catch((error) => {
+      response.status(404).send({
+        message: "User not found",
+        error,
+      });
+    });
+});
+
 
 // register endpoint
 router.post("/register", (request, response) => {
