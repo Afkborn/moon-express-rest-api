@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const auth = require("../auth");
 
 router.post("/login", (request, response) => {
+  console.log("POST /login");
   User.findOne({ email: request.body.email })
     .then((user) => {
       bcrypt
@@ -48,6 +49,7 @@ router.post("/login", (request, response) => {
 });
 
 router.get("/me", auth, (request, response) => {
+  console.log(`GET /users/me`);
   // _id is the id of the user from auth.js
   User.findOne({ _id: request.user.userId })
     .then((user) => {

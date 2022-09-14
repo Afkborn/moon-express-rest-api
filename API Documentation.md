@@ -28,7 +28,6 @@ Product Schema
     name: string,
     price: number,
     stock: number,
-    description: string,
     img: string
 /products
     GET - Get all products - (/)
@@ -50,16 +49,16 @@ Product Schema
 
 User Schema
     _id : string,
-    username: string,
+    name: string,
+    surname: string,
     email: string,
     password: string,
     createdDate: date,
-    isAdmin: boolean
 /users
     POST - Login - (/login)
         login a user
         body: {username, password}
-        return {message, _id, email, token, isAdmin}
+        return {message, _id, email, token}
     POST - Register - (/register)
         register a user
         body: {username, email, password}
@@ -73,3 +72,6 @@ User Schema
     DELETE - Delete a user - (/:userID)
         delete a user
         return the deleted user
+    GET - get user detail - (/me)
+        Bear Token
+        return user detail
