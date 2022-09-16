@@ -9,7 +9,7 @@ module.exports = async (request, response, next) => {
       next();
     } catch (error) {
       response.status(401).json({
-        error: new Error("Invalid request!"),
+        error : "Authentication failed"
       });
     }
   };

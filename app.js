@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
-
 const bodyParser = require("body-parser");
 const dbConnect = require("./db/dbConnect");
+
 
 // Curb Cores Error by adding a header here
 app.use((req, res, next) => {
@@ -18,28 +18,30 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // parse application/json
+
+
 
 // Import Routes
 const categoriesRoutes = require("./routes/categories");
-const productsRoutes = require("./routes/products");
-const usersRoutes = require("./routes/users");
-
-
 app.use("/categories", categoriesRoutes);
 
+const productsRoutes = require("./routes/products");
 app.use("/products", productsRoutes);
 
+const usersRoutes = require("./routes/users");
 app.use("/users", usersRoutes);
+
+const pngUploadRoutes = require("./routes/png-upload");
+app.use("/upload", pngUploadRoutes)
+
+
+
 
 
 
 dbConnect();
-
-
-
 const port = process.env.PORT || 3000;
-
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
