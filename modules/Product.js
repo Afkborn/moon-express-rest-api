@@ -25,7 +25,6 @@ const ProductSchema = mongoose.Schema({
     imageId: {
         type: String,
         required: true
-        
     }
 });
 

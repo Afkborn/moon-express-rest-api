@@ -30,8 +30,6 @@ router.post("/", upload.single("image"), auth, (req, res) => {
     var encImg = newImg.toString("base64");
     var img = Buffer.alloc(encImg.length, encImg, "base64");
     const image = new Image({
-      ownerId: req.body.ownerId,
-      description: req.body.description,
       imageType: req.body.imageType,
       size: file.size,
       img: {

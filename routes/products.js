@@ -1,10 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../modules/Product");
-const Image = require("../modules/Image");
 const auth = require("../auth");
-
-
 
 router.get("/", async (req, res) => {
   console.log("GET /products");
@@ -71,7 +68,7 @@ router.patch("/:productID", auth, async (req, res) => {
           price: req.body.price,
           stock: req.body.stock,
           description: req.body.description,
-          img: req.body.img,
+          imageId: req.body.imageId,
         },
       }
     );
