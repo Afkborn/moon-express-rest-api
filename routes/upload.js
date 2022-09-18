@@ -32,6 +32,7 @@ router.post("/", upload.single("image"), auth, (req, res) => {
     const image = new Image({
       ownerId: req.body.ownerId,
       description: req.body.description,
+      imageType: req.body.imageType,
       size: file.size,
       img: {
         data: img,

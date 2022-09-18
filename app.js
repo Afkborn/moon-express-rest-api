@@ -35,6 +35,8 @@ app.use("/users", usersRoutes);
 const uploadRoutes = require("./routes/upload");
 app.use("/upload", uploadRoutes)
 
+const mediaRoutes = require("./routes/media");
+app.use("/media", mediaRoutes);
 
 
 
