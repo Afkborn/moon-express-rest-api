@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../modules/Product");
+const Image = require("../modules/Image");
 const auth = require("../auth");
 
 router.get("/", async (req, res) => {
@@ -48,7 +49,9 @@ router.get("/:productID", async (req, res) => {
 router.delete("/:productID", auth, async (req, res) => {
   console.log("DELETE /products/" + req.params.productID);
   try {
-    const removedProduct = await Product.remove({ _id: req.params.productID });
+    const removedProduct = await Product.deleteOne({
+      _id: req.params.productID,
+    });
     res.json(removedProduct);
   } catch (err) {
     res.json({ message: err });
@@ -59,6 +62,8 @@ router.delete("/:productID", auth, async (req, res) => {
 router.patch("/:productID", auth, async (req, res) => {
   console.log("PATCH /products/" + req.params.productID);
   try {
+    const oldProduct = await Product.findById(req.params.productID);
+
     const updatedProduct = await Product.updateOne(
       { _id: req.params.productID },
       {
@@ -73,6 +78,15 @@ router.patch("/:productID", auth, async (req, res) => {
       }
     );
     res.json(updatedProduct);
+    try {
+      if (oldProduct.imageId != updatedProduct.imageId) {
+        console.log("delete old image " + oldProduct.imageId);
+        await Image.deleteOne({ _id: oldProduct.imageId });
+      }
+    } catch (err) {
+      console.log(err);
+      console.log("No image to delete");
+    }
   } catch (err) {
     res.json({ message: err });
   }
