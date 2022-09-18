@@ -32,8 +32,8 @@ app.use("/products", productsRoutes);
 const usersRoutes = require("./routes/users");
 app.use("/users", usersRoutes);
 
-const pngUploadRoutes = require("./routes/png-upload");
-app.use("/upload", pngUploadRoutes)
+const uploadRoutes = require("./routes/upload");
+app.use("/upload", uploadRoutes)
 
 
 

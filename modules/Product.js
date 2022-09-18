@@ -22,11 +22,11 @@ const ProductSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    img: {
+    imageId: {
         type: String,
-        required: true  
-    },
-
+        required: true
+        
+    }
 });
 
 
