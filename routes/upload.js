@@ -6,7 +6,6 @@ const imageAction = require("../actions/ImageAction");
 var Image = require("../model/Image");
 var fs = require("fs-extra");
 
-
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads"); // create a folder called uploads
@@ -23,7 +22,6 @@ const fileFilter = (req, file, cb) => {
   }
 };
 const upload = multer({ storage: storage, fileFilter: fileFilter });
-
 
 router.post("/", upload.single("image"), auth, (req, res) => {
   console.log("POST /upload");
@@ -52,7 +50,6 @@ router.post("/", upload.single("image"), auth, (req, res) => {
       message: "Image saved successfully",
       _id: image._id,
     });
-
     // move uploads to media/images folder
     const newFileName = image._id + "." + image.extension;
     fs.rename(req.file.path, "media/images/" + newFileName, (err) => {
