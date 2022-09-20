@@ -66,6 +66,7 @@ router.get("/me", auth, (request, response) => {
 
 // register endpoint
 router.post("/register", (request, response) => {
+  console.log("POST /register");
   bcrypt
     .hash(request.body.password, 10)
     .then((hashedPassword) => {
@@ -102,6 +103,7 @@ router.post("/register", (request, response) => {
 
 //update a user with id
 router.put("/:userID", auth, async (req, res) => {
+  console.log(`PUT /users`);
   console.log("PUT /users/" + req.params.userID);
   try {
     const updatedUser = await User.updateOne(
@@ -124,7 +126,7 @@ router.put("/:userID", auth, async (req, res) => {
 
 //delete a user with id
 router.delete("/:userID", auth, async (req, res) => {
-  console.log("DELETE /users/" + req.params.userID);
+  console.log("DELETE /users/" );
   try {
     const removedUser = await User.remove({ _id: req.params.userID });
     res.json(removedUser);

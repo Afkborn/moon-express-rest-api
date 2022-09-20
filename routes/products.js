@@ -36,7 +36,7 @@ router.post("/", auth, async (req, res) => {
 
 //get a product with id
 router.get("/:productID", async (req, res) => {
-  console.log("GET /products/" + req.params.productID);
+  console.log("GET /products/");
   try {
     const product = await Product.findById(req.params.productID);
     res.json(product);
@@ -47,7 +47,7 @@ router.get("/:productID", async (req, res) => {
 
 //delete a product with id
 router.delete("/:productID", auth, async (req, res) => {
-  console.log("DELETE /products/" + req.params.productID);
+  console.log("DELETE /products/" );
   try {
     const removedProduct = await Product.deleteOne({
       _id: req.params.productID,
@@ -60,7 +60,7 @@ router.delete("/:productID", auth, async (req, res) => {
 
 //update a product with id
 router.patch("/:productID", auth, async (req, res) => {
-  console.log("PATCH /products/" + req.params.productID);
+  console.log("PATCH /products/" );
   try {
     const oldProduct = await Product.findById(req.params.productID);
 

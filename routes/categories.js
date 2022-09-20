@@ -32,7 +32,7 @@ router.post("/", auth, async (req, res) => {
 
 //Update a category
 router.put("/:categoryID", auth, async (req, res) => {
-  console.log("PUT /categories/" + req.params.categoryID);
+  console.log("PUT /categories/" );
   try {
     const updatedCategory = await Category.updateOne(
       { _id: req.params.categoryID },
@@ -52,7 +52,7 @@ router.put("/:categoryID", auth, async (req, res) => {
 
 //get a specific category
 router.get("/:categoryID", async (req, res) => {
-  console.log("GET /categories/" + req.params.categoryID);
+  console.log("GET /categories/" );
   try {
     const category = await Category.findById(req.params.categoryID);
     res.json(category);
@@ -63,7 +63,7 @@ router.get("/:categoryID", async (req, res) => {
 
 //delete a category
 router.delete("/:categoryID", auth, async (req, res) => {
-  console.log("DELETE /categories/" + req.params.categoryID);
+  console.log("DELETE /categories/");
   try {
     const removedCategory = await Category.remove({
       _id: req.params.categoryID,
