@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Category = require("../modules/Category");
+const Category = require("../model/Category");
 const auth = require("../auth");
 // Get all categories
 router.get("/", async (req, res) => {

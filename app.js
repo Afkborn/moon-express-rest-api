@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json()); // parse application/json
 
 
-
+ 
 // Import Routes
 const categoriesRoutes = require("./routes/categories");
 app.use("/categories", categoriesRoutes);
@@ -37,7 +37,6 @@ app.use("/upload", uploadRoutes)
 
 const mediaRoutes = require("./routes/media");
 app.use("/media", mediaRoutes);
-
 
 
 

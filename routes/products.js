@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Product = require("../modules/Product");
-const Image = require("../modules/Image");
+const Product = require("../model/Product");
+const Image = require("../model/Image");
 const auth = require("../auth");
 
 router.get("/", async (req, res) => {
