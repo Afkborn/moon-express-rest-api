@@ -14,17 +14,28 @@ router.get("/:_id", async (req, res) => {
         error: "Image not found",
       });
     }
+
     const fileName = image._id + "." + image.extension;
     const type = req.query.type;
+    let root = null;
     if (type === "thumbnail") {
-      res.sendFile(fileName, { root: "media/thumbnail" });
+      root = { root: "media/thumbnail" };
     } else if (type === "800w") {
-      res.sendFile(fileName, { root: "media/800w" });
+      root = { root: "media/800w" };
     } else if (type === "1200w") {
-      res.sendFile(fileName, { root: "media/1200w" });
+      root = { root: "media/1200w" };
     } else {
-      res.sendFile(fileName, { root: "media/images" });
+      root = { root: "media/images" };
     }
+    console.log(root);
+    res.sendFile(fileName, root, (err) => {
+      if (err) {
+        console.log(err);
+        res.status(404).json({
+          error: "Image not found",
+        });
+      }
+    });
 
     if (!image.inUse) {
       image.inUse = true;
