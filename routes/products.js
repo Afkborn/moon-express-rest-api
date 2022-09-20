@@ -78,15 +78,6 @@ router.patch("/:productID", auth, async (req, res) => {
       }
     );
     res.json(updatedProduct);
-    try {
-      if (oldProduct.imageId != updatedProduct.imageId) {
-        console.log("delete old image " + oldProduct.imageId);
-        await Image.deleteOne({ _id: oldProduct.imageId });
-      }
-    } catch (err) {
-      console.log(err);
-      console.log("No image to delete");
-    }
   } catch (err) {
     res.json({ message: err });
   }

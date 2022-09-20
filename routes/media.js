@@ -27,7 +27,6 @@ router.get("/:_id", async (req, res) => {
     } else {
       root = { root: "media/images" };
     }
-    console.log(root);
     res.sendFile(fileName, root, (err) => {
       if (err) {
         console.log(err);
