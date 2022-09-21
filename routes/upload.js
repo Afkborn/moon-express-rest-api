@@ -36,6 +36,7 @@ router.post("/", upload.single("image"), auth, (req, res) => {
   const image = new Image({
     ownerId: ownerId,
     imageType: file.mimetype,
+    isShowcase: false,
     extension: extension,
     size: file.size,
   });
@@ -53,9 +54,7 @@ router.post("/", upload.single("image"), auth, (req, res) => {
     // move uploads to media/images folder
     const newFileName = image._id + "." + image.extension;
     fs.rename(req.file.path, "media/images/" + newFileName, (err) => {
-      if (err) {
-        console.log(err);
-      } else {
+      if (!err) {
         imageAction.createThumbnail(newFileName);
         imageAction.create800w(newFileName);
         imageAction.create1200w(newFileName);

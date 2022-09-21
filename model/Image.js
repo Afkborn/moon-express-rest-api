@@ -9,9 +9,9 @@ const ImageSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  inUse : {
+  inUse: {
     type: Boolean,
-    default: false
+    default: false,
   },
   imageType: {
     type: String,
@@ -25,7 +25,6 @@ const ImageSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  
 });
 
 module.exports = mongoose.model("Image", ImageSchema);

@@ -3,6 +3,12 @@ const app = express();
 const bodyParser = require("body-parser");
 const dbConnect = require("./db/dbConnect");
 
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
 
 // Curb Cores Error by adding a header here
 app.use((req, res, next) => {
@@ -18,10 +24,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(bodyParser.json()); // parse application/json
-
-
- 
 // Import Routes
 const categoriesRoutes = require("./routes/categories");
 app.use("/categories", categoriesRoutes);
@@ -33,12 +35,10 @@ const usersRoutes = require("./routes/users");
 app.use("/users", usersRoutes);
 
 const uploadRoutes = require("./routes/upload");
-app.use("/upload", uploadRoutes)
+app.use("/upload", uploadRoutes);
 
 const mediaRoutes = require("./routes/media");
 app.use("/media", mediaRoutes);
-
-
 
 
 dbConnect();

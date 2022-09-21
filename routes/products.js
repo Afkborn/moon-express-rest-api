@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Product = require("../model/Product");
-const Image = require("../model/Image");
 const auth = require("../auth");
 
 router.get("/", async (req, res) => {
@@ -25,8 +24,10 @@ router.post("/", auth, async (req, res) => {
       price: req.body.price,
       stock: req.body.stock,
       description: req.body.description,
-      imageId: req.body.imageId,
+      showcaseImageId: req.body.showcaseImageId,
+      imageIds: req.body.imageIds,
     });
+
     const savedPost = await product.save();
     res.json(savedPost);
   } catch (err) {
@@ -37,6 +38,7 @@ router.post("/", auth, async (req, res) => {
 //get a product with id
 router.get("/:productID", async (req, res) => {
   console.log("GET /products/");
+
   try {
     const product = await Product.findById(req.params.productID);
     res.json(product);
@@ -47,7 +49,7 @@ router.get("/:productID", async (req, res) => {
 
 //delete a product with id
 router.delete("/:productID", auth, async (req, res) => {
-  console.log("DELETE /products/" );
+  console.log("DELETE /products/");
   try {
     const removedProduct = await Product.deleteOne({
       _id: req.params.productID,
@@ -60,9 +62,9 @@ router.delete("/:productID", auth, async (req, res) => {
 
 //update a product with id
 router.patch("/:productID", auth, async (req, res) => {
-  console.log("PATCH /products/" );
+  console.log("PATCH /products/");
   try {
-    const oldProduct = await Product.findById(req.params.productID);
+    // const oldProduct = await Product.findById(req.params.productID);
 
     const updatedProduct = await Product.updateOne(
       { _id: req.params.productID },
@@ -73,7 +75,8 @@ router.patch("/:productID", auth, async (req, res) => {
           price: req.body.price,
           stock: req.body.stock,
           description: req.body.description,
-          imageId: req.body.imageId,
+          showcaseImageId: req.body.showcaseImageId,
+          imageIds: req.body.imageIds,
         },
       }
     );
