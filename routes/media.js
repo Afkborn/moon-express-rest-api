@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
+const auth = require("../auth");
 
 var Image = require("../model/Image");
 
@@ -40,6 +40,33 @@ router.get("/:_id", async (req, res) => {
       image.inUse = true;
       image.save();
     }
+  } catch (err) {
+    res.json({ message: "Bad Request" });
+  }
+});
+
+router.delete("/:_id", auth, async (req, res) => {
+  console.log("DELETE /media");
+  try {
+    const image = await Image.findById(req.params._id);
+    if (!image) {
+      return res.status(404).json({
+        error: "Image not found",
+      });
+    }
+    Image.deleteOne({ _id: req.params._id }, (err) => {
+      if (!err) {
+        res.json({
+          message: "Image deleted successfully",
+        });
+      } else {
+        console.log(err);
+        return res.status(400).json({
+          error: "Image could not be deleted",
+        });
+      }
+    });
+    // TODO: delete picture from media folder
   } catch (err) {
     res.json({ message: "Bad Request" });
   }
