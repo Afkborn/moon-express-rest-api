@@ -22,10 +22,14 @@ router.post("/", auth, async (req, res) => {
       categoryId: req.body.categoryId,
       name: req.body.name,
       price: req.body.price,
-      stock: req.body.stock,
       description: req.body.description,
       showcaseImageId: req.body.showcaseImageId,
       imageIds: req.body.imageIds,
+      inStock: req.body.inStock,
+      totalStock: req.body.totalStock,
+      color: req.body.color,
+      stockList: req.body.stockList,
+      gender: req.body.gender
     });
 
     const savedPost = await product.save();
@@ -64,8 +68,6 @@ router.delete("/:productID", auth, async (req, res) => {
 router.patch("/:productID", auth, async (req, res) => {
   console.log("PATCH /products/");
   try {
-    // const oldProduct = await Product.findById(req.params.productID);
-
     const updatedProduct = await Product.updateOne(
       { _id: req.params.productID },
       {
@@ -77,6 +79,10 @@ router.patch("/:productID", auth, async (req, res) => {
           description: req.body.description,
           showcaseImageId: req.body.showcaseImageId,
           imageIds: req.body.imageIds,
+          inStock: req.body.inStock,
+          totalStock: req.body.totalStock,
+          color: req.body.color,
+          stockList: req.body.stockList,
         },
       }
     );

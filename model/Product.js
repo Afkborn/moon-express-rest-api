@@ -13,11 +13,23 @@ const ProductSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
-  stock: {
+  description: {
+    type: String,
+    required: true,
+  },
+  totalStock: {
     type: Number,
     required: true,
   },
-  description: {
+  inStock: {
+    type: Boolean,
+    required: true,
+  },
+  color: {
+    type: String,
+    required: true,
+  },
+  gender: {
     type: String,
     required: true,
   },
@@ -29,7 +41,14 @@ const ProductSchema = mongoose.Schema({
     type: Array,
     required: true,
   },
-  
+  stockList: {
+    type: Array,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("Product", ProductSchema);
