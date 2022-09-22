@@ -24,7 +24,7 @@ router.post("/login", (request, response) => {
               userEmail: user.email,
             },
             "RANDOM-TOKEN",
-            { expiresIn: "24h" }
+            { expiresIn: "30 days" }
           );
           response.status(200).send({
             message: "Login Successful",
