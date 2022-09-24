@@ -75,7 +75,6 @@ router.patch("/:productID", auth, async (req, res) => {
           categoryId: req.body.categoryId,
           name: req.body.name,
           price: req.body.price,
-          stock: req.body.stock,
           description: req.body.description,
           showcaseImageId: req.body.showcaseImageId,
           imageIds: req.body.imageIds,
@@ -83,6 +82,7 @@ router.patch("/:productID", auth, async (req, res) => {
           totalStock: req.body.totalStock,
           color: req.body.color,
           stockList: req.body.stockList,
+          gender: req.body.gender
         },
       }
     );
