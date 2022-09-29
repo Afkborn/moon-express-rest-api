@@ -24,6 +24,8 @@ router.get("/:_id", async (req, res) => {
       root = { root: "media/800w" };
     } else if (type === "1200w") {
       root = { root: "media/1200w" };
+    } else if (type === "400w") {
+      root = { root: "media/400w" };
     } else {
       root = { root: "media/images" };
     }

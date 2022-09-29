@@ -56,6 +56,7 @@ router.post("/", upload.single("image"), auth, (req, res) => {
     fs.rename(req.file.path, "media/images/" + newFileName, (err) => {
       if (!err) {
         imageAction.createThumbnail(newFileName);
+        imageAction.create400w(newFileName);
         imageAction.create800w(newFileName);
         imageAction.create1200w(newFileName);
       }

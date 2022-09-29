@@ -10,6 +10,16 @@ function createThumbnail(fileName, width = 200, height = 200) {
     });
 }
 
+function create400w(fileName) {
+  sharp("media/images/" + fileName)
+    .resize(400)
+    .toFile("media/400w/" + fileName, (err, _) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+}
+
 function create800w(fileName) {
   sharp("media/images/" + fileName)
     .resize(800)
@@ -33,3 +43,4 @@ function create1200w(fileName) {
 exports.createThumbnail = createThumbnail;
 exports.create800w = create800w;
 exports.create1200w = create1200w;
+exports.create400w = create400w;
